@@ -1,0 +1,40 @@
+1.Создал VM (Debian) на базе VirtualBox
+2.sudo adduser raymond 
+3.sudo adduser john
+4.sudo mkdir /home/raymond/.ssh
+5.sudo nano /home/raymond/.ssh/authorized_keys
+6.sudo chmod 700 /home/raymond/.ssh
+7.sudo chmod 600 /home/raymond/.ssh/authorized_keys
+8.sudo chown -R raymond:raymond /home/raymond/.ssh
+9.ssh-keygen -t rsa -b 4096 (на мастере)
+10.ssh-copy-id -i ~/.ssh/id_rsa.pub raymond@192.168.0.44
+11.sudo nano /etc/ssh/sshd_config 
+    (добавил в конец файла:
+        Match User raymond
+            PasswordAuthentication no
+            PubkeyAuthentication yes  
+                        
+        Match User john
+            PasswordAuthentication yes
+            PubkeyAuthentication no  
+    )
+12.systemctl restart ssh
+13.sudo usermod -aG sudo raymond
+14.sudo su - raymond
+15.touch 1.txt
+16.chmod 775 1.txt
+17.exit
+18.sudo chmod 755 /home/raymond
+19.sudo su - john 
+20.touch 1.sh
+21.nano 1.sh ( echo "hello from john" )
+22.chmod +x 1.sh
+23.chmod 775 1.sh
+24.exit
+25.sudo chmod 755 /home/john
+26.sudo chmod -s /bin/bash john
+27.useradd -s /bin/sh test_user
+28.cat /etc/passwd
+29.sudo usermod -aG john test_user
+30.touch test_scp.txt
+31.scp test_scp.txt raymond@192.168.0.44:/home/raymond
