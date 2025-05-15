@@ -1,0 +1,20 @@
+1. sudo nano /etc/systemd/system/uptime-logger.service
+2. sudo nano /usr/local/bin/uptime-logger.sh
+3. sudo systemctl daemon-reload
+4. sudo systemctl enable uptime-logger
+5. sudo systemctl start uptime-logger
+6. tail -f /var/log/uptime.log
+7. sudo nano /etc/systemd/system/cleanup.service
+8. sudo nano /usr/local/bin/cleanup.sh
+9. sudo systemctl daemon-reload
+10. sudo systemctl enable cleanup.service
+11. sudo systemctl start cleanup.service
+12. tail -f /var/log/uptime.log
+13. tail -f /var/log/overload
+14. tail -f /var/log/cleanup
+15. crontab -e
+16. */10 * * * * /usr/bin/systemctl --no-pager status uptime-logger.service
+17. tail -f /var/log/syslog 
+18. crontab -r
+19. systemctl stop uptime-logger.service
+20. systemctl stop cleanup.service

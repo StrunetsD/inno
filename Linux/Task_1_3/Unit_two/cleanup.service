@@ -1,0 +1,17 @@
+[Unit]
+Description= This unit is needed for clenup overload file
+After=uptime-logger.service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/cleanup.sh
+Restart=always
+RestartSec=3
+
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
