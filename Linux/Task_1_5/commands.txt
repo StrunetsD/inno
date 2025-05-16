@@ -1,0 +1,3 @@
+sudo ln -s /etc/nginx/sites-available/blue.conf /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/yellow.conf /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/blue.conf /etc/nginx/sites-enabled/
