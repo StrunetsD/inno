@@ -1,0 +1,19 @@
+server {
+	listen 80;
+	listen [::]:80;
+	server_name innodima.ddns.net; 
+	return 301 https://$host$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	server_name innodima.ddns.net;
+	
+	ssl_certificate /etc/letsencrypt/live/innodima.ddns.net/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/innodima.ddns.net/privkey.pem;
+
+	  root /var/www/html;
+	  index index.nginx-debian.html;
+
+
+}
