@@ -1,0 +1,45 @@
+mkdir test
+echo "test" >> test/test_123
+ln -s /home/test/ /tmp/soft_link
+cp /tmp/soft_link/test_123 /tmp 
+ln /tmp/test_123 /tmp/hard_link
+df -i /tmp
+fdisk /dev/sdb
+lsblk
+apt install xfsprogs
+mkfs.xfs /dev/sdb1
+mkdir /mnt
+mount /dev/sdb1 /mnt
+df -h 
+cd /mnt
+touch test.txt
+df -hT
+fdisk /dev/sdb
+lsblk
+xfs_growfs /mnt
+ls /mnt
+================================
+LVM:
+lsblk
+pvcreate /dev/sdb
+vgcreate my_volume_group /dev/sdb
+lvcreate -n lv1 -L 1.2G my group
+lvcreate -n lv2 -L 1.2G my group
+lvs
+apt install xfsprogs
+mkfs.xfs /dev/my_group/lv1
+mkfs.xfs /dev/my_group/lv2
+mkdir /mnt/lv1
+mdkir /mnt/lv2
+mount /dev/my_group/lv1 /mnt/lv1
+mount /dev/my_group/lv2 /mnt/lv2
+df -h 
+lsblk
+pvcreate /dev/sdc
+vgextend my_group /dev/sdc
+lvextend -l +100%FREE /dev/my_group/lv1
+xfs_growfs /mnt/lv1
+df -h
+pvs
+lvs
+vgs
