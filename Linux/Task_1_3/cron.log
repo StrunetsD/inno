@@ -1,0 +1,288 @@
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 8min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 768.0K (peak: 3.7M)
+        CPU: 12.556s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─262487 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 9min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 772.0K (peak: 3.7M)
+        CPU: 14.071s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─263539 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 10min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 780.0K (peak: 3.7M)
+        CPU: 15.650s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─264612 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 11min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 780.0K (peak: 3.7M)
+        CPU: 17.221s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─265723 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 12min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 792.0K (peak: 3.7M)
+        CPU: 18.795s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─266782 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 13min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 808.0K (peak: 3.7M)
+        CPU: 20.344s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─267821 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 14min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 800.0K (peak: 3.7M)
+        CPU: 21.903s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─268891 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 15min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 808.0K (peak: 3.7M)
+        CPU: 23.402s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─269945 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 16min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 816.0K (peak: 3.7M)
+        CPU: 24.942s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─271001 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 17min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 820.0K (peak: 3.7M)
+        CPU: 26.507s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─272051 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 18min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 836.0K (peak: 3.7M)
+        CPU: 27.993s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─273115 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 19min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 832.0K (peak: 3.7M)
+        CPU: 29.531s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─274161 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 20min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 840.0K (peak: 3.7M)
+        CPU: 31.117s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─275233 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 21min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 840.0K (peak: 3.7M)
+        CPU: 32.588s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─276305 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 22min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 848.0K (peak: 3.7M)
+        CPU: 34.178s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─277368 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 23min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 860.0K (peak: 3.7M)
+        CPU: 35.673s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─278415 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 24min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 880.0K (peak: 3.7M)
+        CPU: 37.250s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─279473 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 25min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 876.0K (peak: 3.9M)
+        CPU: 38.812s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─280518 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 26min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 872.0K (peak: 4.1M)
+        CPU: 40.351s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─281585 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 27min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 872.0K (peak: 4.1M)
+        CPU: 41.931s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─282635 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+● uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2025-05-15 12:57:25 +03; 28min ago
+   Main PID: 252748 (uptime-logger.s)
+      Tasks: 2 (limit: 18756)
+     Memory: 884.0K (peak: 4.1M)
+        CPU: 43.309s
+     CGroup: /system.slice/uptime-logger.service
+             ├─252748 /bin/bash /usr/local/bin/uptime-logger.sh
+             └─283722 sleep 1
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+○ uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: inactive (dead) since Thu 2025-05-15 13:26:10 +03; 50s ago
+   Duration: 28min 45.379s
+    Process: 252748 ExecStart=/usr/local/bin/uptime-logger.sh (code=killed, signal=TERM)
+   Main PID: 252748 (code=killed, signal=TERM)
+        CPU: 43.546s
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Stopping uptime-logger.service - Log system uptime every 15 seconds...
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: uptime-logger.service: Deactivated successfully.
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Stopped uptime-logger.service - Log system uptime every 15 seconds.
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: uptime-logger.service: Consumed 43.546s CPU time, 4.1M memory peak, 0B memory swap peak.
+○ uptime-logger.service - Log system uptime every 15 seconds
+     Loaded: loaded (/etc/systemd/system/uptime-logger.service; enabled; preset: enabled)
+     Active: inactive (dead) since Thu 2025-05-15 13:26:10 +03; 1min 50s ago
+   Duration: 28min 45.379s
+    Process: 252748 ExecStart=/usr/local/bin/uptime-logger.sh (code=killed, signal=TERM)
+   Main PID: 252748 (code=killed, signal=TERM)
+        CPU: 43.546s
+
+мая 15 12:57:25 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Started uptime-logger.service - Log system uptime every 15 seconds.
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: Stopping uptime-logger.service - Log system uptime every 15 seconds...
+мая 15 13:26:10 dstrunetss-IdeaPad-3-15ITL6 systemd[1]: uptime-logger.service: Deactivated successfully.
+мая 15 13:26:10 dstr    if [ -f "$OVERLOAD_LOG" ]; then
+        size_kb=$(du -k "$OVERLOAD_LOG" | cut -f1)
+        
+        if [ "$size_kb" -ge "$MAX_SIZE_KB" ]; then
+            > "$OVERLOAD_LOG"
+
+            echo "[$(date +'%F %T')] Очищен файл $OVERLOAD_LOG (размер: ${size_kb}KB)" >> "$CLEANUP_LOG"
+        fi
+    fi
+    
+    sleep 30
+done

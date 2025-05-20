@@ -18,3 +18,7 @@
 18. crontab -r
 19. systemctl stop uptime-logger.service
 20. systemctl stop cleanup.service
+21. ping 8.8.8.8 > ping_data.txt &
+22. jobs
+23. fg %1
+24. kill -9 294764
