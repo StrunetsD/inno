@@ -1,0 +1,4 @@
+docker run -d --name inno-dkr-06-local -p 127.0.0.1:8892:80 --log-driver=local --log-opt max-size=10MiB nginx:stable
+
+docker run -d -p 127.0.0.1:8893:80 --name inno-dkr-06-global nginx:stable
+
