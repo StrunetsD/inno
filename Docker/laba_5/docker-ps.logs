@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+39937391c80d   nginx:stable   "/docker-entrypoint.…"   2 minutes ago    Up 2 minutes    80/tcp                   inno-dkr-05-stop-923da2cca2
+c81085eed2e3   nginx:stable   "/docker-entrypoint.…"   3 minutes ago    Up 3 minutes    80/tcp                   inno-dkr-05-run-9bc07002f6
+1a7a735b31ac   nginx:stable   "/docker-entrypoint.…"   35 minutes ago   Up 35 minutes   127.0.0.1:8889->80/tcp   inno-dkr-04

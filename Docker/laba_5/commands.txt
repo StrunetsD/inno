@@ -1,0 +1,11 @@
+docker run -d --name "inno-dkr-05-run-$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10)" nginx:stable
+
+docker run -d --name "inno-dkr-05-stop-$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 10)" nginx:stable
+
+docker ps | tee docker-ps.logs
+
+docker stop 39937391c80d
+
+docker stop $(docker ps -q)
+
+ocker rm -f $(docker ps -aq)
