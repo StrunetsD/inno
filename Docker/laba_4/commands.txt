@@ -1,0 +1,11 @@
+docker volume create inno-dkr-04-volume
+docker run -d \
+-p 127.0.0.1:8889:80  \
+-v ~/Desktop/inno/Docker/laba_4/nginx.conf:/etc/nginx/nginx.conf:ro \
+--name inno-dkr-04 \
+-v inno-dkr-04-volume:/var/log/nginx/external \
+ nginx:stable
+
+docker volume ls
+
+sudo ls -la /var/lib/docker/volumes/inno-dkr-04-volume/_data
