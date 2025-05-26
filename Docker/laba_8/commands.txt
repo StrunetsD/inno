@@ -1,0 +1,7 @@
+docker build -t nginx:inno-dkr-08 .
+
+docker images
+
+docker run -d -p 127.0.0.1:8900:80 nginx:inno-dkr-08
+
+docker ps
