@@ -1,0 +1,3 @@
+docker pull nginx:stable-alpine
+
+docker tag nginx:stable-alpine nginx:inno-dkr-07
