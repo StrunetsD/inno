@@ -1,0 +1,5 @@
+docker run -d -p 127.0.0.1:8901:80 --name my-nginx-container nginx:inno-dkr-09
+
+docker logs 
+
+docker ps 
