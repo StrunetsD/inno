@@ -1,0 +1,13 @@
+dd if=/dev/zero of=./testfile bs=1M count=10
+
+docker build -t inno-dkr-11:default .
+
+docker inspect inno-dkr-11:default
+
+docker history inno-dkr-11:default --no-trunc
+
+docker images
+
+docker build -t inno-dkr-11:optimized .
+
+docker history inno-dkr-11:optimized --no-trunc
