@@ -1,0 +1,13 @@
+docker build --build-arg NG_VERSION=1.21.6 -t nginx:inno-dkr-10 .
+
+docker images
+
+docker run -d --name inno-dkr-10 -e INNO=dima nginx:inno-dkr-10
+
+docker ps
+
+docker exec -it inno-dkr-10 /bin/bash
+
+env 
+
+docker exec inno-dkr-10 ls /opt/
