@@ -1,0 +1,23 @@
+docker pull nginx:stable-alpine
+
+docker tag nginx:stable-alpine nginx:inno-dkr-12
+
+docker images
+
+docker rmi nginx:stable-alpine
+
+docker images
+
+docker pull nginx:stable-alpine
+
+docker images | tee /home/user/images.txt
+
+docker rmi -f $(docker images -q)
+
+docker images
+
+docker rmi -f 7a
+
+docker stop 7a
+
+docker ps
