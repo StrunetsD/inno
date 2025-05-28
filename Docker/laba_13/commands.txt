@@ -1,0 +1,13 @@
+ocker build -t cache:1 .
+
+ocker build -t cache:2 .
+
+docker build -t cache:no-cached --no-cache .
+
+docker images --no-trunc
+
+docker build --build-arg MYARG=3 -t cache:3 .
+
+docker build --build-arg MYARG=4 -t cache:4 .
+
+docker inspect cache:4 | grep "MYARG"  ( не найдено, нужно добавить в образ ENV MYARG=${MYARG} )
