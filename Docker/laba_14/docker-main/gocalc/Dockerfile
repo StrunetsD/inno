@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.21-alpine 
 
 
 RUN apk add --no-cache git
@@ -28,8 +28,10 @@ FROM alpine:3.10.3
 RUN apk add --no-cache postgresql-libs
 
 
-COPY --from=builder /build/app /app
+COPY --from=0 /build/app /app
 
+ARG SECRET
+RUN echo "{SECRET}" >> secret.txt
 
 EXPOSE 7000
 

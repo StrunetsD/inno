@@ -1,0 +1,3 @@
+ docker run -p 7000:7000 -d -e POSTGRES_URI="postgres://postgres:postgresql@my_postgres:5432/postgres?sslmode=disable"  --link my_postgres:postgres gocalc
+
+docker run -d --name my_postgres -e POSTGRES_PASSWORD=postgresql -p 5432:5432  postgres:latest
