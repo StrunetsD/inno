@@ -1,0 +1,11 @@
+docker run --privileged -d docker:dind
+
+docker exec -it c72ca1bb764b sh
+
+docker pull redis:5
+
+
+
+docker run -it --name safe-docker \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker:latest sh
