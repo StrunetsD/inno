@@ -1,0 +1,21 @@
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+nano /etc/default/docker
+
+DOCKER_OPTS="$DOCKER_OPTS --insecure-registry 192.168.0.44:5000"
+
+nnao /etc/docker/deamon.json
+
+{
+  "insecure-registries": ["192.168.0.44:5000"]
+}
+
+
+docker pull hello-world
+
+docker tag hello-world 192.168.0.44:5000/hello-world
+
+docker push 192.168.0.44:5000/hello-world
+
+http://192.168.0.44:5000/v2/_catalog
+
