@@ -1,0 +1,192 @@
+.hero {
+  margin-top: -48px;
+  margin-bottom: 48px;
+  background-color: $hero-background;
+  .hero-inner {
+    padding-top: 80px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    @media only screen and (max-width: 890px) {
+      padding-top: 30px;
+      flex-direction: column-reverse;
+    }
+    @media #{$mobile} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .hero-content {
+      margin-right: 25px;
+      @media only screen and (max-width: 890px) {
+        margin-right: 0;
+      }
+      h1 {
+        @include title36();
+        margin-top: 0;
+        color: $hero-heading-text;
+        @media only screen and (max-width: 890px) {
+          margin-top: 30px;
+        }
+        @media #{$mobile} {
+          @include title24();
+        }
+      }
+      p {
+        @include paragraph18();
+        color: $hero-paragraph-text;
+        @media #{$mobile} {
+          @include paragraph18();
+        }
+      }
+      .hero-links {
+        margin-top: 80px;
+        display: flex;
+        flex-wrap: wrap;
+        @media #{$mobile} {
+          margin-top: 30px;
+        }
+        >div{
+          margin-bottom: $baseline/2;
+          >a {
+            @include default-button('primary');
+            height: 40px;
+            margin-bottom: 10px;
+            padding-top: 4px;
+            font-size: 16px;
+            padding-left: 0;
+            padding-right: 9px;
+          }
+          div {
+            font-family: $medium-sans-font;
+            color: $orangetone;
+            @media #{$mobile} {
+              display: none;
+            }
+          }
+          &.primary-button {
+            margin-right: $baseline;
+            >a {
+              width: 190px;
+            }
+          }
+          &.secondary-button {
+            >a {
+              width: 180px;
+              background-color: transparent;
+              color: $grey600;
+              border: 2px solid $grey500;
+              padding-top: 2px;
+              @media #{$mobile} {
+                width: auto;
+                padding-left: 10px;
+                padding-right: 10px;
+              }
+            }
+            div {
+              color: $grey600;
+              a {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+    img {
+      max-width: 400px;
+      width: 100%;
+      flex-shrink: 0;
+      @media only screen and (max-width: 890px) {
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+#home_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-column-gap: $baseline * 1.5;
+  grid-row-gap: $baseline * 1.5;
+  justify-content: space-around;
+  grid-template-areas:
+    "playlists playlists"
+    "left right";
+
+  @media #{$one-column} {
+    display: flex;
+    flex-direction: column;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+
+    > * {
+      width: 100%;
+      margin-bottom: $baseline * 1.5;
+    }
+  }
+  @media #{$mobile} {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  h2 {
+    padding-left: 16px;
+    color: $theme-accent;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    line-height: 1;
+  }
+
+  .box {
+    margin-bottom: 0;
+  }
+
+  > * {
+    min-width: 320px;
+  }
+
+  #home_playlists_area {
+    grid-area: playlists;
+    margin-bottom: 12px;
+    @media #{$one-column} {
+      margin-bottom: $baseline * 1.5;
+    }
+    .latest-playlists-header {
+      color: $accent;
+      @media #{$mobile} {
+        width: 96%;
+      }
+    }
+    ul.playlists {
+      margin-bottom: 0;
+      li {
+        &:nth-child(3),
+        &:nth-child(4) {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+
+  #home_left_column {
+    grid-area: left;
+    > div {
+      margin-bottom: $baseline * 1.5;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  #home_right_column {
+    grid-area: right;
+    > div {
+      margin-bottom: $baseline * 1.5;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

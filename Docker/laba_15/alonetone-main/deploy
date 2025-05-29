@@ -1,0 +1,108 @@
+#!/bin/bash
+#
+# This script requires `PermitUserEnvironment yes`
+# to be set on the remote hosts /etc/ssh/sshd_config
+
+echo "Deployanatoring teh codez!"
+echo
+
+# handle git and bundle install
+ssh alonetone '
+  cd /data/alonetone
+
+  BUNDLE_CACHE_PATH="/home/deploy"
+  HOME="/home/deploy"
+  BUNDLE_PATH="/home/deploy/.rbenv/shims/bundle"
+  BUNDLE_COMMAND="sudo -u deploy RAILS_ENV=production ${BUNDLE_PATH}"
+  GIT_COMMAND="sudo -u deploy git"
+  PUMA_PID_FILE=tmp/puma.pid
+  PUMA_SOCKET=tmp/puma.sock
+
+  echo "Telling sidekiq to chill on new jobs..."
+  sudo systemctl restart sidekiq
+
+  if [ ! "$($GIT_COMMAND diff)" == "" ]
+    then
+      echo "WARNING: local changes on server, exiting!"
+      exit 0
+  fi
+
+  $GIT_COMMAND fetch
+
+  if [ ! "$($GIT_COMMAND diff origin/main db)" == "" ]; then
+    RUN_MIGRATIONS=1
+  fi
+
+  puma_version_changed=$($GIT_COMMAND diff origin/main Gemfile.lock | grep puma | wc -l)
+
+  if [ ! "$($GIT_COMMAND diff origin/main Gemfile.lock)" == "" ]
+    then
+      echo "Gemfile changed, bundle installing..."
+      $GIT_COMMAND reset --hard origin/main
+      $BUNDLE_COMMAND install
+      echo
+    else
+      echo "skipping bundle install, gemfile has not changed since last time."
+      $GIT_COMMAND reset --hard origin/main
+      echo
+  fi
+
+  if [[ $RUN_MIGRATIONS ]]; then
+    echo "Running migrations, hold tight..."
+    time $BUNDLE_COMMAND exec rake db:migrate
+  fi
+
+  echo "Compiling assets..."
+  time $BUNDLE_COMMAND exec rake assets:precompile
+
+  echo ""
+  echo "Processes before restart"
+  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+
+  if [ $puma_version_changed -gt 1 ]
+    then
+      echo "Puma version changed, hot restarting puma"
+      $BUNDLE_COMMAND exec pumactl restart
+    else
+      echo "Run puma, run! (phased restart)"
+      $BUNDLE_COMMAND exec pumactl phased-restart
+  fi
+
+  # Actually cycle sidekiq
+  echo "Kiq sidekiq back to work"
+  sudo systemctl restart sidekiq
+
+  sleep 3
+
+  echo ""
+  echo "Processes during restart"
+  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+
+  sleep 5
+
+  echo ""
+  echo "Processes end of restart"
+  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+  
+  sleep 5
+
+  echo ""
+  echo "Processes end of restart"
+  cat $PUMA_PID_FILE | xargs pgrep -P | xargs ps -o pid,start,cmd -p
+  '
+
+bundle exec newrelic deployments
+REVISION="$(git rev-parse --short HEAD)"
+echo "Notifying bugsnag of revision release $REVISION"
+curl https://build.bugsnag.com/ \
+  --header "Content-Type: application/json" \
+  --data '{
+    "apiKey": "'"$BUGSNAG_KEY"'",
+    "appVersion": "'"$REVISION"'",
+    "releaseStage": "production",
+    "sourceControl": {
+      "provider": "github",
+      "repository": "https://github.com/sudara/alonetone",
+      "revision": "'"${REVISION}"'"
+    }
+  }'

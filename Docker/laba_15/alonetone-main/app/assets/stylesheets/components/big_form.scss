@@ -1,0 +1,75 @@
+.big_form {
+  .box {
+    @include shadow6();
+    margin-bottom: 0;
+    h2 {
+      @include title24();
+      height: auto;
+      line-height: 1.2;
+      padding-top: 24px;
+      padding-right: $baseline * 1.5;
+      padding-bottom: 11px;
+      padding-left: $baseline * 1.5;
+      margin-bottom: 0;
+      @media #{$mobile} {
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
+      }
+    }
+    h3 a {
+      text-decoration: underline;
+      color: $accent;
+    }
+    form {
+      padding-left: $baseline * 1.5;
+      padding-right: $baseline * 1.5;
+      padding-top: 30px;
+      padding-bottom: 8px;
+      @media #{$mobile} {
+        padding-left: $baseline / 2;
+        padding-right: $baseline / 2;
+      }
+      textarea, label, .inline_form_error {
+        max-width: 430px;
+      }
+      textarea {
+        min-height: 80px;
+        width: 100%;
+      }
+      input[type="submit"] {
+        @include default_button("primary");
+      }
+      .field_with_hint_before {
+        span + input {
+          @media #{$one-column} {
+            width: 155px;
+          }
+        }
+      }
+      .form_radio_group {
+        .single_col {
+          max-width: none;
+        }
+        .columns {
+          .form_radio_pair {
+            display: flex;
+            label {
+              margin-left: 15.5px;
+              position: relative;
+              top: -1px;
+            }
+            input {
+              flex-shrink: 0;
+            }
+          }
+          div {
+            max-width: 200px;
+            @media #{$mobile} {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

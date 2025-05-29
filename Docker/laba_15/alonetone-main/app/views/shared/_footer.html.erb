@@ -1,0 +1,69 @@
+<% if User.currently_online.count > 2 %>
+<div class="footer_alonetoners_online">
+  <h3>Alonetoners online</h3>
+    <div>
+        <%= User.currently_online.collect do |user| %>
+          <% link_to user.name, main_app.user_home_path(user.login) %>
+        <% end.join(', ').html_safe %>
+    </div>
+</div>
+<% end %>
+
+<% if logged_in? %>
+<div class="footer_forum_topics" data-turbo="false">
+  <div class="footer_forum_topics_inner">
+    <a href="https://forum.alonetone.com/" class="forum_view_all">
+        Check out the new forums... &nbsp;<i class="icon_caret">
+        <%== render file: svg_path('svg/icon_caret.svg') %>
+        </i>
+    </a>
+    <h3>Latest forum topics</h3>
+    <ul>
+      <li>
+        <%= link_to "Welcome to the new forums", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum" %>
+        <div>by <%= link_to "sudara", "https://forum.alonetone.com/t/welcome-to-the-new-alonetone-forum" %></div>
+      </li>
+    </ul>
+  </div>
+</div>
+<% end %>
+
+<div class="footer_bottom">
+  <div class="footer_columns">
+    <div class="footer_column">
+      <h3 class="footer_column_header">alone<em>tone</em> radio</h3>
+      <a href="/radio/">
+        <%== render file: svg_path('svg/icon_radio.svg') %>
+      </a>
+    </div>
+
+    <div class="footer_column">
+      <h3 class="footer_column_header">Browse</h3>
+      <div><%= link_to "All Artists", "/users"%></div>
+      <div><%= link_to "Recent Playlists", "/playlists"%></div>
+      <div><%= link_to "Recent Tracks", "/radio"%></div>
+      <div><%= link_to "Popular Tracks", "/radio/popular"%></div>
+    </div>
+
+    <div class="footer_column">
+      <h3 class="footer_column_header">Do Stuff</h3>
+    <% if logged_in? %>
+      <div><%= link_to "Upload", "/upload"%></div>
+      <div><%= link_to "New Playlist/Album", "/new_album"%></div>
+    <% end %>
+      <div><%= link_to "Get An Account", "/get_an_account"%></div>
+    <% if moderator? %>
+      <div><%= link_to "Admin", "/admin/users" %></div>
+    <% end %>
+      </div>
+
+    <div class="footer_column">
+      <h3 class="footer_column_header">More</h3>
+      <div><%= link_to "About", "/about"%></div>
+      <div data-turbo="false"><%= link_to "Forum (new!)", "https://forum.alonetone.com" %></div>
+      <div data-turbo="false"><%= link_to "Community Guidelines", '/forums/ideas-features-praise/community-guidelines' %></div>
+      <div><%= link_to "✨Support alonetone on Patreon", 'https://patreon.com/alonetone' %></div>
+    </div>
+
+  </div>
+</div>

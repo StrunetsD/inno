@@ -1,0 +1,41 @@
+#user_index {
+  .mini_paginator {
+    display: inline-block;
+    &.bottom_paginator {
+      float: right;
+    }
+  }
+  #large_users_grid {
+    display: flex;
+    flex-wrap: wrap;
+    div.user {
+      position: relative;
+      text-align: center;
+      font-size: 11px;
+      padding-bottom: $baseline / 4;
+      text-align: center;
+      background-color: $user-card-background;
+      border-radius: 6px;
+      box-shadow: 0px 1.5px 2.75px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      a.overlay {
+        display: block;
+        height: 0;
+        padding-bottom: 100%;
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+        }
+      }
+      .name {
+        font-size: 13px;
+        display: block;
+        margin-top: 8px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

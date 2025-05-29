@@ -1,0 +1,10 @@
+.playlists_container {
+  h2 {
+    color: $accent;
+    margin-top: 0;
+    margin-bottom: 16px;
+    @media #{$mobile} {
+      padding-left: 2.5%;
+    }
+  }
+}

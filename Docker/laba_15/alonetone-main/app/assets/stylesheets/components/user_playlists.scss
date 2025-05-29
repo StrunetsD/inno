@@ -1,0 +1,25 @@
+.user_playlists {
+  h1 {
+    @media #{$mobile} {
+      padding-left: 2.5%;
+    }
+  }
+  .sort_instructions {
+    color: $user-playlists-sort-instructions;
+    margin: 8px 0;
+    @media #{$mobile} {
+      padding-left: 2.5%;
+    }
+  }
+  ul.playlists {
+    @media #{$mobile} {
+      width: 100%;
+      margin-right: 0;
+    }
+    li {
+      &.sortable-ghost {
+        opacity: .2;
+      }
+    }
+  }
+}

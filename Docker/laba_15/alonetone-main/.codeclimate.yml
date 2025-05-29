@@ -1,0 +1,27 @@
+version: "2"
+checks:
+  argument-count:
+    enabled: false
+  complex-logic:
+    enabled: false
+  file-lines:
+    enabled: false
+  method-complexity:
+    enabled: false
+  method-count:
+    enabled: false
+  method-lines:
+    enabled: false
+  nested-control-flow:
+    enabled: false
+  return-statements:
+    enabled: false
+  similar-code:
+    enabled: false
+plugins:
+  rubocop:
+    enabled: true
+    channel: rubocop-1-4-1
+  eslint:
+    enabled: true
+    channel: "eslint-7"

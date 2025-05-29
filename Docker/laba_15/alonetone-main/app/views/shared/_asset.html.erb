@@ -1,0 +1,127 @@
+<% if @playlist %>
+<turbo-frame id="playlist-track" target="_top" data-turbo-action="advance">
+<div class="track_content" data-controller="big-play" data-playlist-target="track" data-action="
+   track:whileLoading@document->big-play#whileLoading
+   track:pause@document->big-play#pause
+   track:play@document->big-play#play
+   track:playing@document->big-play#playing
+   track:ended@document->big-play#stop
+   track:seeked@document->big-play#seeked
+	 playlist-track-playback:updateState@window->big-play#updateState
+   track:whilePlaying@document->big-play#whilePlaying"
+	 data-big-play-track-id-value="<%= @track.id %>">
+
+<% else %>
+	<% content_for :open_graph do %>
+	  <meta property="og:url" content="<%= request.url %>" />
+	  <meta property="og:type" content="music.song" />
+	  <meta property="og:title" content="<%= @asset.title %>" />
+	  <meta property="og:description" content="A track by <%= @user.name %>" />
+	  <meta property="og:image" content="<%= user_avatar_url(@user, variant: :large_avatar) %>" />
+	  <meta property="music.musician" content="<%= user_home_path(@user) %>">
+	<% end %>
+
+<div class="track_content stitches_track "
+  data-controller="big-play single-playback"
+  data-action="
+    track:play->big-play#play
+    track:playing->big-play#playing
+    track:pause->big-play#pause
+    track:ended->big-play#stop
+    track:whileLoading->big-play#whileLoading
+    track:whilePlaying->big-play#whilePlaying
+    track:registerListen->single-playback#registerListen
+    track:seeked->big-play#seeked
+    big-play:seek->single-playback#seek"
+  data-single-playback-id="<%= @asset.id %>">
+  <%= render partial: 'shared/back_to_artist' %>
+<% end %>
+
+  <%= render partial: 'assets/big_player' %>
+
+  <div class="track_post">
+    <h1><%= @asset.name %></h1>
+    <% unless @playlist %>
+      <h3><%= link_to @asset.user.name, user_home_path(@asset.user) %></h3>
+    <% end %>
+    <div class="track_stats">
+      <div class="created">Uploaded <%= local_time_ago(@asset.created_at) %>.</div>
+      <div class="favorites">
+        <i class="icon_favs">
+          <%== render file: svg_path('svg/icon_favorite_inverted.svg') %>
+        </i>
+        <%= @asset.favorites_count %>
+      </div>
+      <div class="plays">
+        <i class="icon_plays">
+          <%== render file: svg_path('svg/icon_play_inverted.svg') %>
+        </i>
+        <%= @asset.listens_count %>
+      </div>
+
+    </div>
+
+    <%= format_track_description(@asset.description) %>
+
+    <div>
+      <%= markdown(@asset.credits) if @asset.credits.present? %>
+    </div>
+
+    <div class= "edit_links_and_favorite">
+      <% if logged_in? %>
+        <div class="track_favorite">
+        <%= button_to toggle_favorite_path(asset_id: @asset.id), class: 'add_to_favorites',
+            method: :put, data: {controller: 'favorite', action: 'favorite#toggle', 'favorite-id-value': @asset.id} do %>
+            Favorite <%== render file: svg_path('svg/animation_heart.svg') %>
+        <% end %>
+        </div>
+      <% end %>
+
+      <% if @asset.audio_file.attached? %>
+      <div class="download_link">
+        <a href="<%= media_url(@asset) %>" download="<%= @asset.audio_file.filename %>">
+          Download <%== render file: svg_path('svg/song_download.svg') %>
+        </a>
+      </div>
+      <% end %>
+
+      <div class="edit_links">
+        <% if authorized? %>
+          <%= link_to("Edit", edit_user_track_path(@user, @asset), class: "edit_link") %>
+        <% end %>
+
+        <% if moderator? %>
+          <% if @asset.is_spam? %>
+            <%= link_to "Unspam", unspam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
+          <% else %>
+            <%= link_to "Spam", spam_admin_asset_path(@asset.id), method: :put, class: "edit_link" %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+
+  <%= render partial: 'assets/comment', locals: { asset: @asset } if can_comment_on?(@asset) %>
+  <%= render partial: 'shared/comments' if @comments.present? %>
+
+  <% if @listeners.present? %>
+  <div class="track_social">
+  <h3>Recent Listeners</h3>
+    <div class='recent_listeners'>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @listeners } %>
+    </div>
+  </div>
+  <% end %>
+
+  <% if @favoriters.present? %>
+  <div class="track_social">
+  <h3>Favorited By</h3>
+    <div class='favoriters'>
+    <%= render partial: 'shared/users_to_edge', locals: {users: @favoriters } %>
+    </div>
+  </div>
+  <% end %>
+</div>
+</turbo-frame>

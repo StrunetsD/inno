@@ -1,0 +1,34 @@
+<div data-controller="admin--request" class="<%= account_request.status %>">
+  <div class="date_column">
+    <%= local_time_ago account_request.created_at %>
+    <div>
+      <%= account_request.status %>
+    </div>
+    <div>
+      <% if account_request.moderated_by %>
+      by <%= account_request.moderated_by.login %>
+      <% end %>
+    </div>
+  </div>
+  <div class="user_column">
+    <div>
+      <div><%= account_request.claimed? ? link_to(account_request.login, user_home_path(account_request.login)) : account_request.login %></div>
+      <div><%= account_request.email %></div>
+      <div><%= "#{account_request.submission_count} submissions!!" if account_request.submission_count > 1 %></div>
+    </div>
+  </div>
+  <div class="bio_column">
+    <div><%= account_request.entity_type.upcase %></div>
+    <div><%= account_request.details %></div>
+  </div>
+  <div class="button_column">
+    <%= button_to "Approve & Email", approve_admin_account_request_path(account_request),
+      class: 'approve_button', method: :put,
+      data: { 'admin--request-target': 'approveButton',
+      action: 'click->admin--request#moderated ajax:success->admin--request#approve ajax:error->admin--request#error' } %>
+    <%= button_to "Deny", deny_admin_account_request_path(account_request),
+      class: 'deny_button', method: :put,
+      data: { 'admin--request-target': 'denyButton',
+      action: 'click->admin--request#moderated ajax:success->admin--request#deny ajax:error->admin--request#error' } %>
+  </div>
+</div>

@@ -1,0 +1,387 @@
+.asset,
+.track {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 58px;
+  height: auto;
+  background-color: $track-background;
+  border-bottom: 1px solid $track-border-bottom;
+  &.favorited_track {
+    min-height: 81px;
+  }
+  &.open {
+    position: relative;
+    z-index: 2;
+    box-shadow: $track-open-box-shadow;
+  }
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 1px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+  &:first-child {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+  &:focus {
+    outline: none;
+  }
+  &.draggable-mirror {
+    border-radius: 0;
+    box-shadow: 0 0px 5px 1px #cccccc7a;
+    z-index: 9999999;
+  }
+  .button,
+  .title {
+    float: left;
+  }
+  .seekbar {
+    clear: both;
+    height: 9px;
+    margin-bottom: 8px;
+    position: relative;
+    .loaded {
+      position: absolute;
+      overflow: hidden;
+      height: 5px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      background-color: $track-seekbar-loaded-background;
+      transition: width 0.25s linear;
+    }
+    .played {
+      position: absolute;
+      top: 2px;
+      height: 5px;
+      background-color: $accent;
+      transition: width 0.25s linear;
+    }
+    &:not(.show) {
+      display: none;
+    }
+  }
+  &:not(.open) {
+    .seekbar {
+      display: none;
+    }
+  }
+  .asset_top {
+    position: relative;
+    z-index: 1;
+    background-color: $track-background;
+    .asset_top_row {
+      display: flex;
+      div.button {
+        width: 50px;
+        height: 58px;
+        a {
+          display: block;
+          width: 50px;
+          height: 58px;
+          svg {
+            width: 28px;
+            height: 28px;
+            margin-top: 15px;
+            margin-left: 8px;
+            pointer-events: none;
+            fill: $track-play-button-background;
+            .outline {
+              stroke: $track-play-button-background;
+            }
+            .icon {
+              fill: $track-play-button-background;
+            }
+            .pauseGroup {
+              line {
+                stroke: $track-pause-button-stroke;
+              }
+            }
+          }
+        }
+      }
+      div.title {
+        display: flex;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: auto;
+        height: 58px;
+        cursor: pointer;
+        padding-top: 13px;
+        flex-grow: 1;
+        .title_left_column {
+          flex-grow: 1;
+          .title_left_column_top {
+            display: flex;
+            a.track_link {
+              line-height: 1.1;
+              font-size: 16px;
+              font-weight: normal;
+              font-family: $medium-sans-font;
+              display: block;
+              overflow: hidden;
+              white-space: nowrap;
+              flex-grow: 1;
+              width: 50px;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+        .title_right_column {
+          position: relative;
+          width: 50px;
+          height: 100%;
+          .counter {
+            font-size: 15px;
+            font-weight: bold;
+            position: absolute;
+            right: 14px;
+            bottom: 27px;
+            text-align: right;
+          }
+          time {
+            font-variant-numeric: tabular-nums;
+            font-size: 12px;
+            position: absolute;
+            right: 15px;
+            bottom: 14px;
+            display: block;
+            text-align: right;
+            color: $track-time-text;
+          }
+        }
+        a {
+          font-size: 15px;
+          font-weight: bold;
+          text-decoration: none;
+          -webkit-font-smoothing: antialiased;
+        }
+        .title_left_column_bottom {
+          clear: both;
+          display: flex;
+          a {
+            -webkit-font-smoothing: subpixel-antialiased;
+          }
+        }
+        span.by {
+          font-size: 11px;
+        }
+        .artist_container {
+          padding-top: 1px;
+          width: 50px;
+          overflow-x: hidden;
+          white-space: nowrap;
+          flex-grow: 1;
+          text-overflow: ellipsis;
+          color: $track-artist-text;
+          a.artist {
+            font-size: 12px;
+            font-weight: normal;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        span.track_play,
+        span.latest,
+        span.popular {
+          font-size: 12px;
+          margin-left: 20px;
+        }
+      }
+    }
+    .asset_favorited {
+      font-size: 12px;
+      position: relative;
+      clear: both;
+      padding-left: 50px;
+      height: 30px;
+      line-height: 26px;
+      cursor: pointer;
+      margin-top: -6px;
+      i.icon_favorite {
+        position: absolute;
+        top: 0px;
+        left: 45px;
+        display: block;
+        svg {
+          width: 21px;
+          height: 21px;
+        }
+      }
+      span.favorited_by {
+        font-weight: bold;
+        margin-left: 16px;
+      }
+      span.favorited_when {
+        color: $track-favorited-when-text;
+      }
+    }
+  }
+  .tracks_reveal {
+    display: none;
+    position: relative;
+    margin-top: -361px; // good default, js will tweak
+    overflow: auto;
+    box-sizing: border-box;
+    z-index: 0;
+    button.add_to_favorites,
+    button.favorited {
+      @include image_button();
+      position: absolute;
+      z-index: 2;
+      top: 6px;
+      right: 22px;
+      display: block;
+      width: 26px;
+    }
+    .tracks_reveal_top {
+      display: flex;
+      min-height: 67px;
+      margin-right: 10px;
+      margin-left: 10px;
+      margin-bottom: 9px;
+      padding-top: 16px;
+      padding-right: 16px;
+      padding-bottom: 0;
+      padding-left: 16px;
+      border-radius: 6px;
+      background-color: $track-reveal-top-background;
+      .alonetoner {
+        width: 50px;
+        height: 50px;
+        margin-right: $baseline;
+        a {
+          overflow: hidden;
+          width: 50px;
+          height: 50px;
+        }
+        a img {
+          width: 50px;
+          height: 50px;
+          border: 1px solid #9fa28d;
+          &.no_border {
+            border: none;
+          }
+        }
+      }
+      .description {
+        font-size: 14px;
+        line-height: 17px;
+        margin-right: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .user_description {
+          color: $track-description-text;
+          margin-right: 26px;
+          word-wrap: break-word;
+          -webkit-hyphens: auto;
+          -moz-hyphens: auto;
+          hyphens: auto;
+          img {
+            display: none;
+          }
+          p {
+            margin-bottom: 1em;
+          }
+        }
+        p img {
+          display: none;
+        }
+        p {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+        .description_more p a {
+          font-size: 12px !important;
+          font-weight: bold !important;
+          margin-bottom: 1em;
+          text-decoration: none !important;
+        }
+        .created {
+          font-size: 12px;
+          color: $track-created-text;
+          margin-bottom: 10px;
+        }
+        .below_description {
+          display: flex;
+          justify-content: space-between;
+          height: 28px;
+          margin-top: auto;
+          a {
+            font-size: 12px;
+            display: block;
+            color: $track-view-more-text;
+            flex-grow: 1;
+            font-weight: bold;
+            text-decoration: underline;
+            span {
+              &.narrow-column-alt {
+                display: none;
+              }
+              @media only screen and (min-width: 748px) and (max-width: 860px) {
+                display: none;
+                &.narrow-column-alt {
+                  display: inline;
+                }
+              }
+              @media only screen and (max-width: 435px) {
+                display: none;
+                &.narrow-column-alt {
+                  display: inline;
+                }
+              }
+            }
+          }
+          .plays {
+            font-size: 12px;
+            font-weight: bold;
+            padding-right: 8px;
+            padding-left: 8px;
+            text-align: center;
+            color: $track-stats-text;
+            display: flex;
+            justify-content: flex-start;
+          }
+          .favorites {
+            font-size: 12px;
+            font-weight: bold;
+            padding-left: 8px;
+            text-align: center;
+            color: $track-stats-text;
+            display: flex;
+            justify-content: flex-start;
+          }
+          i {
+            margin-left: 8px;
+            svg {
+              width: 17px;
+              position: relative;
+              top: -4px;
+              path {
+                fill: $track-stats-icon-background;
+              }
+            }
+          }
+        }
+      }
+    }
+    .track_links {
+      display: none;
+      float: right;
+      margin-top: 5px;
+      margin-bottom: $baseline;
+      a {
+        float: right;
+        margin-top: 10px;
+        margin-left: 4px;
+        @include default_button();
+        &.show_to_admin_or_owner {
+          display: none;
+        }
+      }
+    }
+  }
+}

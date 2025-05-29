@@ -1,0 +1,29 @@
+.history {
+  .columns_header {
+    @media #{$mobile} {
+      padding-left: 0;
+    }
+  }
+  h2 {
+    padding-left: 16px;
+    color: $accent;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    line-height: 1;
+  }
+  
+  #left {
+    @media #{$one-column} {
+      margin-bottom: $baseline * 2;
+    }
+  }
+  #right {
+    .box {
+      overflow: hidden;
+      margin-bottom: 0;
+      > :last-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

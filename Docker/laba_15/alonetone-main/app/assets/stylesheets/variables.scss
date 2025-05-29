@@ -1,0 +1,236 @@
+// site layout sizing
+
+$baseline: 24px; // used for various layout spacing
+
+$content_max_width: 960px; // max width that site content can expand to
+
+$site_max_width: calc( #{$content_max_width} + #{$baseline} * 3); // left and right gutters are (1.5 * $baseline) each
+
+// media tiers
+
+$mobile: 'only screen and (max-width: 420px)';
+$mobile-to-one-column: 'only screen and (min-width: 421px) and (max-width: 748px)';
+$one-column: 'only screen and (max-width: 748px)';
+$two-column-narrow: 'only screen and (min-width: 749px) and (max-width: 952px)';
+$two-column-narrow-to-full: 'only screen and (min-width: 953px)';
+$responsive: 'only screen and (max-width: #{$site_max_width})';
+
+// fonts
+@font-face {
+  font-family: 'Alright-v2-Normal';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Regular-latin1-tnum.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Alright-v2-Normal';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Bold-latin1-tnum.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Alright-v2-Normal-Medium';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Medium-latin1-tnum.woff2') format('woff2');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Alright-v2-Normal-Black';
+  src: url('https://cdn.alonetone.com/fonts/Alright-v2-Normal-Black-latin1-tnum.woff2') format('woff2');
+  font-weight: normal;
+}
+
+$sans-font: 'Alright-v2-Normal', sans-serif; // "Alright Sans Bold" exists using font-weight: bold or <strong> on this fontface
+$medium-sans-font: 'Alright-v2-Normal-Medium', sans-serif;
+$black-font: 'Alright-v2-Normal-Black', sans-serif;
+
+@mixin samo-shadow-and-radius() {
+  border-radius: 6px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15)
+}
+
+@mixin shadow1() {
+  box-shadow: 0px 1px 2px rgba(53, 53, 53, 0.15);
+}
+
+@mixin shadow1inner() {
+  box-shadow: inset 0px .5px 1.5px rgba(0, 0, 0, 0.33);
+}
+
+@mixin shadow2() {
+  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
+}
+
+@mixin shadow6() {
+  box-shadow: 0px 6px 18px rgba(51, 44, 28, 0.19);
+}
+
+@mixin image-button() {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+@mixin default-button($type: '') {
+  font-family: $sans-font;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 28px;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 26px;
+  padding: 0 16px;
+  text-align: center;
+  text-decoration: none;
+  color: $default-button-text;
+  border: 0;
+  border-radius: 4px;
+  background-color: $default-button-background;
+  box-shadow: none;
+  &:hover {
+    background-color: $default-button-background-hover;
+  }
+  &:active {
+    background-color: $accent;
+  }
+
+  @if $type == primary {
+    height: 32px;
+    line-height: 34px;
+    font-size: 14px;
+    background: $accent;
+    color: $white;
+    padding-left: $baseline * 1.5;
+    padding-right: $baseline * 1.5;
+    &:hover {
+      background-color: $primary-button-background-hover;
+    }
+    &:active {
+      background-color: $primary-button-background-active;
+    }
+  }
+
+  @if $type == primary_danger {
+    height: 32px;
+    line-height: 34px;
+    font-size: 14px;
+    background: $red800;
+    color: $white;
+    padding-left: $baseline * 1.5;
+    padding-right: $baseline * 1.5;
+    &:hover {
+      background-color: $red600;
+    }
+    &:active {
+      background-color: $red1000;
+    }
+  }
+
+  @if $type == outline {
+    height: 32px;
+    line-height: 34px;
+    font-size: 14px;
+    background: transparent;
+    color: $red500;
+    border: 1px solid $red600;
+    padding-left: $baseline * 1.5;
+    padding-right: $baseline * 1.5;
+    &:hover {
+      background-color: transparent;
+    }
+    &:active {
+      background-color: transparent;
+    }
+  }
+
+  @if $type == sub_nav {
+    height: 24px;
+    line-height: 1;
+    padding-top: 7px;
+    font-size: 12px;
+    color: $black;
+    padding-left: $baseline / 2;
+    padding-right: $baseline / 2;
+    background-color: $white;
+  }
+}
+
+@mixin shadow-one() {
+  box-shadow: 0px 1px 2px rgba(53, 53, 53, 0.15);
+}
+
+@mixin shadow-one-inner() {
+  box-shadow: inset 0px .5px 1.5px rgba(0, 0, 0, 0.33);
+}
+
+
+@mixin paragraph14() {
+  font-family: $medium-sans-font;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+@mixin paragraph14bold() {
+  font-family: $sans-font;
+  font-weight: bold;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+@mixin paragraph16() {
+  font-family: $medium-sans-font;
+  font-size: 16px;
+}
+
+@mixin title20() {
+  font-family: $sans-font;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@mixin title24() {
+  font-family: $sans-font;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+  @mixin shadow2() {
+  box-shadow: 0px 2px 4px rgba(53, 53, 53, 0.25);
+}
+
+@mixin title36() {
+  font-size: 36px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
+@mixin title24() {
+  font-size: 24px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
+@mixin title28() {
+  font-size: 28px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
+@mixin title18() {
+  font-size: 18px;
+  font-family: $sans-font;
+  font-weight: bold;
+}
+
+@mixin paragraph18() {
+  font-size: 18px;
+  font-family: $medium-sans-font;
+  line-height: 1.5;
+}
+
+@mixin paragraph16() {
+  font-size: 16px;
+  font-family: $medium-sans-font;
+  line-height: 1.5;
+}

@@ -1,0 +1,55 @@
+#playlist_and_track_content_header {
+  margin-top: -18px;
+  @media #{$one-column} {
+    width: 96%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+#playlist_and_track_content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  @media #{$one-column} {
+    width: 96%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .playlist_sidebar {
+    @include samo-shadow-and-radius();
+    position: relative;
+    background-color: $playlist-sidebar-background;
+    min-width: 300px;
+    max-width: 320px;
+    width: 35%;
+    margin-right: 40px;
+    @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
+      order: 2;
+      max-width: none;
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: $baseline;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+  }
+
+  #playlist-track {
+    flex: 1;
+    min-width: 300px;
+    @media only screen and (max-width: 850px) { // The point where the playlist has to drop to one column
+      order: 1;
+      width: 100%;
+      max-width: 100%;
+      margin-left: auto!important;
+      margin-right: auto;
+    }
+  } 
+
+  .track_content {
+    width: 100%;
+    flex: 1;
+  }
+}

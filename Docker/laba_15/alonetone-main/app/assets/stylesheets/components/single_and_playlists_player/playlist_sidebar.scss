@@ -1,0 +1,230 @@
+.playlist_sidebar {
+  .small_cover {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 99%;
+    overflow-y: hidden;
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+    }
+    svg {
+      border-radius: 4px 4px 0 0;
+    }
+  }
+  h1 {
+    line-height: 22px;
+    margin-top: $baseline;
+    margin-bottom: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    text-align: center;
+    font-size: 16px;
+    font-family: $sans-font;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 14px;
+    line-height: $baseline;
+    font-weight: normal;
+    margin-top: -3px;
+    text-align: center;
+    color: $playlist-sidebar-artist-text;
+    .by {
+      color: $playlist-sidebar-artist-by-text;
+    }
+    .parentheses {
+      color: $playlist-sidebar-artist-parantheses-text;
+    }
+    .edit_playlist {
+      color: $playlist-sidebar-artist-edit-link-text;
+    }
+  }
+  ul.tracklist {
+    margin-top: $baseline / 2;
+    li {
+      display: flex;
+      clear: both;
+      overflow: auto;
+      min-height: 35px;
+      border-top: 1px solid $tracklist-track-border;
+      &:first-child {
+        border-top: 0;
+      }
+      &:last-child {
+        border-bottom: 1px solid $tracklist-track-border;
+      }
+      &:hover,
+      &.active {
+        background-color: $tracklist-track-background-active;
+        a.position_name_time {
+          color: $tracklist-track-text-active;
+          span.track_name {
+            color: $tracklist-track-text-active;
+          }
+          span.track_position {
+            color: $tracklist-position-text-active;
+          }
+          span.time_text {
+            color: $tracklist-time-text-active;
+          }
+        }
+        a.play_button {
+          i {
+            background-image: $playlist-sidebar-play-active-background;
+          }
+        }
+        a.pause_button {
+          i {
+            background-image: $playlist-sidebar-pause-active-background;
+          }
+        }
+      }
+      a.play_button,
+      a.pause_button {
+        font-size: 12px;
+        line-height: 9px;
+        display: block;
+        float: left;
+        width: 24px;
+        height: 24px;
+        margin-top: 1px;
+        margin-right: 4px;
+        margin-left: 0;
+        padding: 4px 3px 5px 6px;
+      }
+      a.play_button {
+        i {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          background-image: $playlist-sidebar-play-background;
+        }
+      }
+      a.pause_button {
+        i {
+          display: inline-block;
+          width: 24px;
+          height: 24px;
+          background-image: $playlist-sidebar-pause-background;
+        }
+      }
+      a.position_name_time {
+        font-size: 14px;
+        line-height: 20px;
+        display: block;
+        display: flex;
+        padding-top: 7px;
+        padding-bottom: 8px;
+        white-space: nowrap;
+        text-decoration: none;
+        flex-grow: 1;
+        span.track_position {
+          display: block;
+          float: left;
+          font-variant-numeric: tabular-nums;
+          margin-right: 4px;
+          color: $tracklist-position-text;
+          min-width: 21px;
+        }
+        span.track_name {
+          color: $tracklist-track-text;
+          font-family: $medium-sans-font;
+          display: block;
+          overflow: hidden;
+          width: 0;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          flex-grow: 1;
+        }
+        .time_text {
+          font-size: 12px;
+          margin-right: 12px;
+          font-variant-numeric: tabular-nums;
+          color: $tracklist-time-text;
+        }
+      }
+    }
+  }
+  .sidebar_downloads {
+    margin-top: $baseline;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    ul.downloads_links,
+    ul.external_links {
+      margin-top: 0;
+      margin-bottom: 0;
+      li {
+        background-color: $sidebar-link-background;
+        overflow: auto;
+        border-bottom: 1px solid black;
+        &:hover {
+          background-color: $sidebar-link-background-hover;
+        }
+        a {
+          font-family: $sans-font;
+          font-size: 12px;
+          font-weight: 300;
+          display: block;
+          box-sizing: border-box;
+          width: 100%;
+          padding: 10px $baseline / 2;
+          text-decoration: none;
+          color: $sidebar-link-text;
+          i {
+            background-image: image-url("svg/icon_playlist_link.svg");
+            display: inline-block;
+            background-size: 100%;
+            width: 17px;
+            height: 17px;
+            font-size: 14px;
+            margin-right: 11px;
+            vertical-align: middle;
+            position: relative;
+            top: -1px;
+          }
+          &.spotify i {
+            background-image: image-url("svg/icon_playlist_spotify.svg");
+          }
+          &.bandcamp i {
+            background-image: image-url("svg/icon_playlist_bandcamp.svg");
+          }
+          &.itunes i {
+            background-image: image-url("svg/icon_playlist_itunes.svg");
+          }
+          &.apple i {
+            background-image: image-url("svg/apple_music.svg");
+          }
+          &.google_play i {
+            background-image: image-url("svg/icon_playlist_google_play.svg");
+          }
+          &.youtube i {
+            background-image: image-url("svg/icon_playlist_youtube.svg");
+          }
+          .action_text {
+            font-size: 10px;
+            float: right;
+            color: $sidebar-link-action-text;
+            position: relative;
+            top: 3px;
+          }
+        }
+      }
+    }
+    ul.downloads_links li a i {
+      background-image: image-url("svg/icon_playlist_download.svg");
+    }
+  }
+  .edit_playlist_container {
+    margin-top: 15px;
+    text-align: left;
+    width: 100%;
+    position: absolute;
+    bottom: -50px;
+    .edit_playlist {
+      @include default-button();
+    }
+  }
+}

@@ -1,0 +1,150 @@
+valid_comment_on_asset_by_user:
+  commentable: valid_mp3 (Asset)
+  body: "Well, this is an awesome track, says a user"
+  is_spam: false
+  user: sudara
+  commenter: sudara
+  remote_ip: 127.0.0.1
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+valid_comment_on_asset_by_guest:
+  commentable: valid_mp3 (Asset)
+  body: "Well, this is an awesome track, says a nobody"
+  is_spam: false
+  user: sudara
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+spam_comment_on_asset_by_user:
+  commentable: valid_mp3 (Asset)
+  body: "Well, this is an is_spammy is_spam."
+  is_spam: true
+  user: sudara
+  commenter: sudara
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+spam_comment_on_asset_by_guest:
+  commentable: valid_mp3 (Asset)
+  body: "Well, this is an is_spammy is_spam."
+  is_spam: true
+  user: sudara
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+comment_with_no_body:
+  commentable: valid_mp3 (Asset)
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+comment_on_asset_by_guest:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Your old friend from 2009 here, this is great."
+  is_spam: false
+  user: arthur
+  private: true
+  created_at: <%= 2.day.ago.to_formatted_s :db %>
+
+private_comment_on_asset_by_guest:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Well, this is an awesome track, I say in secret"
+  is_spam: false
+  user: arthur
+  private: true
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+private_comment_on_asset_by_user:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Well friend, this is an awesome track."
+  is_spam: false
+  user: arthur
+  commenter: henri_willig
+  remote_ip: 127.0.0.2
+  private: true
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_spam_comment_on_asset_by_user:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Sudara, don't forget spam."
+  is_spam: true
+  user: arthur
+  commenter: william_shatner
+  remote_ip: 127.0.0.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_comment_on_asset_by_user:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Well friend, this is your best work."
+  is_spam: false
+  user: arthur
+  commenter: henri_willig
+  remote_ip: 127.0.0.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+another_public_comment_on_asset_by_user:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "This is your best work."
+  is_spam: false
+  user: arthur
+  commenter: sudara
+  remote_ip: 127.0.0.5
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_comment_soft_deletion_relations:
+  commentable: valid_arthur_mp3 (Asset)
+  body: "Public non-spam comment that tests soft_deletion of users' relations"
+  is_spam: false
+  user: arthur
+  commenter: sudara
+  remote_ip: 127.0.0.8
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_non_spam_comment_to_self:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment on user's own asset even though different ip"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: jamie_kiesl
+  remote_ip: 127.1.1.9
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_non_spam_comment_to_another_user:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment to another user"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.6
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_non_spam_comment_to_self_by_ip:
+  commentable: jamie_kiesl_the_duck (Asset)
+  body: "Public non-spam comment on the same user's own asset by ip"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+public_non_spam_comment_for_soft_deleted_asset:
+  commentable: asset_with_relations_for_soft_delete (Asset)
+  body: "Public non-spam comment on asset that's going to be soft deleted"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: will_studd
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
+
+another_public_non_spam_comment_for_soft_deleted_asset:
+  commentable: asset_with_relations_for_soft_delete (Asset)
+  body: "Another public non-spam comment on asset that's going to be soft deleted"
+  is_spam: false
+  user: jamie_kiesl
+  commenter: sudara
+  remote_ip: 127.1.1.2
+  private: false
+  created_at: <%= 1.day.ago.to_formatted_s :db %>
