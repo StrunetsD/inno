@@ -1,0 +1,1 @@
+docker run --name inno-dkr-24 -d --cap-drop ALL --cap-add CHOWN --cap-add NET_BIND_SERVICE nginx:stable-alpine
