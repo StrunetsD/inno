@@ -1,0 +1,11 @@
+docker network create inno-25-bridge
+
+docker network ls
+
+docker run -d --name inno-dkr-25-nginx --net inno-25-bridge nginx:stable
+
+docker run -it --net inno-25-bridge alpine:3.10
+
+apk add curl 
+
+curl 172.20.0.2
