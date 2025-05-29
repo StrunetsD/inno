@@ -1,0 +1,8 @@
+services:
+  nginx:
+    image: nginx:stable
+    container_name: inno27
+    ports:
+      - 127.0.0.1:81:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf

@@ -1,0 +1,8 @@
+
+
+services: 
+  nginx:
+    image: nginx:stable
+    ports: 
+      - "127.0.0.1:18888:80"
+    container_name: inno27
