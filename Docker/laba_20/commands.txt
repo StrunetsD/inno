@@ -1,0 +1,13 @@
+docker run -d -p 80:80 --restart=no --name nginx_no_restart nginx:stable-alpine
+docker run -d -p 81:81 --restart=always --name nginx_always nginx:stable-alpine
+docker run -d -p 82:82 --restart=unless-stopped --name nginx_unless-stopped nginx:stable-alpine
+docker run -d -p 83:83 --restart=on-failure --name nginx_failure nginx:stable-alpine
+
+
+
+Существует 4 вида Restart policy:
+
+no - автоматический рестарт не требуется (по умолчанию все контейнеры запускаются как раз с этой политикой).
+on-failure - перезапуск производится только, если работа контейнера завершается с кодом ошибки, отличным от 0 (то есть при любых ошибках).
+always - перезапускать всегда - и в случае успешного выполнения, и в случае неуспешного. Правда, есть нюанс - в случае, если ты вручную останавливаешь контейнер, он не перезапускается. Зато если ты его остановил, а потом перезапустил Docker демон (ну или хост), то контейнер перезапустится тоже, даже если ты его прежде останавливал вручную.
+unless-stopped - похоже на always, но если контейнер был остановлен (вручную или иным образом), то он не запустится даже после рестарта Docker/хоста.
