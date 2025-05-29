@@ -1,0 +1,9 @@
+FROM openjdk:8-jdk-alpine 
+
+
+RUN apk add maven
+
+COPY . .
+
+RUN mvn clean install -Dmaven.test.skip=true -U
+
