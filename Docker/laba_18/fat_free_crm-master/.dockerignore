@@ -1,0 +1,7 @@
+.git
+*.yml
+config/*.yml 
+!config/settings.default.yml
+!config/database.sqlite.yml
+!config/database.postgres.docker.yml
+/public/avatars/**/*.gif
