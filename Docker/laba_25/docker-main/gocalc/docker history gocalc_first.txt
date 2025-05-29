@@ -1,0 +1,7 @@
+IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+bfee4244144c   43 minutes ago   CMD ["/app"]                                    0B        buildkit.dockerfile.v0
+<missing>      43 minutes ago   EXPOSE map[7000/tcp:{}]                         0B        buildkit.dockerfile.v0
+<missing>      43 minutes ago   COPY /build/app /app # buildkit                 8.87MB    buildkit.dockerfile.v0
+<missing>      55 minutes ago   RUN /bin/sh -c apk add --no-cache postgresql…   2.8MB     buildkit.dockerfile.v0
+<missing>      5 years ago      /bin/sh -c #(nop)  CMD ["/bin/sh"]              0B        
+<missing>      5 years ago      /bin/sh -c #(nop) ADD file:fe1f09249227e2da2…   5.55MB    

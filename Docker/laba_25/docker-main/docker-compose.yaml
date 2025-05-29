@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:10
+    ports:
+      - ${DB_PORTS}:${DB_PORTS}
+    environment:
+      - DB_PORTS=${DB_PORTS}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+    volumes:
+      - /var/log/test-psql
+    networks:
+      - app_db
+  app:
+    build: 
+      context: ./gocalc/
+      dockerfile: Dockerfile
+    ports:
+      - ${ListenAddress}:${ListenAddress}
+    environment:
+      - POSTGRES_URI=${POSTGRES_URI}
+    restart: unless-stopped
+    depends_on:
+      - db  
+    networks:
+      - app_db
+      - app_nginx
+  nginx:
+    image: nginx:stable
+    ports:
+      - ${NGINX_PORTS}:${NGINX_PORTS}
+    depends_on:
+      - db
+      - app
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - app_nginx
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+      - CHOWN
+      - SETGID  
+      - SETUID    
+    restart: unless-stopped
+
+networks:
+  app_db:
+    driver: bridge
+  app_nginx:
+    driver: bridge
