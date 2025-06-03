@@ -1,0 +1,13 @@
+USE mysql;
+SELECT User, Host, plugin FROM user;
+
+
+ALTER USER 'voting_user'@'%' IDENTIFIED WITH mysql_native_password BY 'voting_pass';
+FLUSH PRIVILEGES;
+
+docker exec 925bcf00feb1 chown -R www-data:www-data /var/www/html/storage
+docker exec 925bcf00feb1 chmod -R 775 /var/www/html/storage
+
+
+curl -X GET "http://172.12.0.2:9200/_cat/indices?v"
+curl -X GET "http://172.12.0.2:9200/nginx-*/_search?pretty"

@@ -1,33 +1,112 @@
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - xpack.security.enabled=false
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      network:
+        ipv4_address: 172.12.0.2
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      network:
+        ipv4_address: 172.12.0.3
+
+  fluentd:
+    build: 
+      context: ./config/fluent/
+      dockerfile: Dockerfile
+    volumes:
+      - ./config/fluent/fluent.conf:/fluentd/etc/fluent.conf
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    networks:
+      network: 
+        ipv4_address: 172.12.0.4
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "ps", "aux", "|", "grep", "fluentd"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
   nginx:
     image: nginx:alpine
     ports:  
-    - 20000:80
+      - "20000:80"
     volumes:
+      - ./dkr30-main:/var/www/html
       - ./dkr30-main/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
-      - network
+      network:
+        ipv4_address: 172.12.0.5
+    logging: 
+      driver: fluentd
+      options:
+        fluentd-address: 172.12.0.4:24224
+        tag: nginx.access
+        labels: "message"
+        env: "message"
+    depends_on:
+      fluentd:
+        condition: service_healthy
+      voting:
+        condition: service_started
+
   mysql:
     image: mysql:8.0
-    ports:
-      - 3306:3306
     environment:
       MYSQL_USER: voting_user
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: voting_app
       MYSQL_PASSWORD: voting_pass
+      MYSQL_ROOT_HOST: '%'
     volumes: 
       - mysql_data:/var/lib/mysql
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "--password=root"]
+      interval: 5s
+      timeout: 10s
+      retries: 15
     networks:
-      - network
+      network:
+        ipv4_address: 172.12.0.6
+
   redis:
     image: redis:alpine
-    ports: 
-      - 6379:6379
     volumes: 
-      - redis_data:/data 
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
-      - network
+      network:
+        ipv4_address: 172.12.0.7
+
   voting:
     build:
       context: ./dkr30-main
@@ -38,23 +117,44 @@ services:
       DB_USERNAME: voting_user
       DB_PASSWORD: voting_pass
       REDIS_HOST: redis
-      PHP_FPM_LISTEN: "0.0.0.0:9000"
-      PHP_FPM_ALLOW: "any"
-    command: >
-      sh -c "sleep 10 && php artisan migrate --force && php artisan db:seed --force && php-fpm -F -R"
-    ports: 
-      - 9000:9000
+    command: 
+      - /bin/sh
+      - -c
+      - |
+        chown -R www-data:www-data /var/www/html/storage
+        chmod -R 775 /var/www/html/storage
+        sleep 15  
+        php artisan migrate --force
+        php artisan db:seed --force
+        php-fpm -F -R
+    expose:
+      - "9000"
     networks:
-      - network
+      network:
+        ipv4_address: 172.12.0.8
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: 172.12.0.4:24224
+        tag: voting.app
+        labels: "message"
+        env: "message"
     depends_on:
-      - mysql
-      - redis
+      fluentd:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
 volumes:
   redis_data:
   mysql_data:
+  es_data:
 
 networks:
   network:
     driver: bridge
-
+    ipam:
+      config:
+        - subnet: 172.12.0.0/24
