@@ -1,0 +1,73 @@
+---
+# tasks file for nginx
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Remove default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload Nginx
+
+- name: Create .htpasswd file
+  template:
+    src: htpasswd.j2
+    dest: /etc/nginx/.htpasswd
+    mode: 0640
+  notify: Reload Nginx
+
+- name: Set proper ownership for .htpasswd
+  file:
+    path: /etc/nginx/.htpasswd
+    owner: root
+    group: www-data
+    mode: 0640
+  when: nginx_auth_enabled | default(true)
+
+- name: Ensure web directory exists
+  file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+- name: Set recursive permissions for web directory
+  file:
+    path: /var/www/html
+    recurse: yes
+    owner: www-data
+    group: www-data
+    mode: "u=rwX,g=rX,o=rX"
+
+- name: Configure Nginx site
+  template:
+    src: default.conf.j2
+    dest: "{{ nginx_config_path }}"
+    mode: 0644
+  notify: Reload Nginx
+
+- name: Enable Nginx site
+  file:
+    src: "{{ nginx_config_path }}"
+    dest: "/etc/nginx/sites-enabled/{{ nginx_site_name }}.conf"
+    state: link
+  notify: Reload Nginx
+
+- name: Allow HTTP traffic
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 80
+    jump: ACCEPT
+    comment: "Allow HTTP"
+    state: present
+
+- name: Ensure Nginx is running
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes

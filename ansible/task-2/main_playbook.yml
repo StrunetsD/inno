@@ -1,0 +1,8 @@
+- name: Install Docker and Docker Compose
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  roles:
+   -  role: docker
+   -  role: nginx

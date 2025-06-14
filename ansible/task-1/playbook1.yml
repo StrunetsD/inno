@@ -1,0 +1,90 @@
+---
+- name: Install Docker and Docker Compose
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  vars:
+    docker_compose_version: "2.24.7"
+    docker_ubuntu_repo: "https://download.docker.com/linux/ubuntu"
+    docker_debian_repo: "https://download.docker.com/linux/debian"
+    docker_gpg_key: "https://download.docker.com/linux/{{ 'ubuntu' if ansible_distribution == 'Ubuntu' else 'debian' }}/gpg"
+
+  tasks:
+    - name: Check Docker installation
+      command: docker --version
+      register: docker_check
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Check Docker Compose installation
+      command: docker-compose --version
+      register: docker_compose_check
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Skip if Docker already installed
+      meta: end_play
+      when: docker_check.rc == 0
+
+    - name: Install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Create keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: 0755
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: "{{ docker_gpg_key }}"
+        keyring: /etc/apt/keyrings/docker.gpg
+
+    - name: Set correct repository URL
+      set_fact:
+        docker_repo_url: "{{ docker_ubuntu_repo if ansible_distribution == 'Ubuntu' else docker_debian_repo }}"
+        docker_repo_distro: "{{ 'jammy' if ansible_distribution == 'Ubuntu' else 'bookworm' }}"
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.gpg] {{ docker_repo_url }} {{ docker_repo_distro }} stable"
+        state: present
+        filename: docker
+        update_cache: yes
+
+    - name: Install Docker packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        update_cache: yes
+
+    - name: Create docker group
+      group:
+        name: docker
+        state: present
+
+    - name: Add current user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Install Docker Compose
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-{{ 'x86_64' if ansible_architecture == 'x86_64' else 'aarch64' }}"
+        dest: /usr/local/bin/docker-compose
+        mode: '0755'
+
+

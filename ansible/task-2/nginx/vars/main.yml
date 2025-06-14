@@ -1,0 +1,6 @@
+---
+# vars file for nginx
+nginx_user: "test"
+nginx_password: "test"
+nginx_site_name: "default"
+nginx_config_path: "/etc/nginx/sites-available/{{ nginx_site_name }}.conf"
