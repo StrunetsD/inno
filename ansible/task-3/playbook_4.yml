@@ -1,0 +1,8 @@
+- name: SSH
+  hosts: all
+  become: yes
+  gather_facts: yes
+  vars_files:
+       - "{{ playbook_dir }}/roles/ssh/vars/vault.yml"
+  roles:
+   -  role: ssh

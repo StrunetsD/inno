@@ -1,0 +1,21 @@
+---
+- name: Install npm dependencies
+  npm:
+    path: "{{ website_dir }}"
+    state: present
+  when: run_git_clone | bool
+
+- name: Start application
+  command: "npm start"
+  args:
+    chdir: "{{ website_dir }}"
+  async: 300
+  poll: 0
+  when: run_git_clone | bool
+
+- name: Verify application status
+  wait_for:
+    host: 192.168.0.44
+    port: 3000
+    timeout: 60
+  when: run_git_clone | bool

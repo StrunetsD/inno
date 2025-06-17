@@ -1,0 +1,134 @@
+---
+- name: Check Node.js installation
+  block:
+    - name: Check Node.js (Linux/macOS)
+      command: node --version
+      register: node_check
+      ignore_errors: yes
+      changed_when: false
+      when: ansible_os_family != 'Windows'
+    
+    - name: Check Node.js (Windows)
+      win_command: node --version
+      register: node_check
+      ignore_errors: yes
+      changed_when: false
+      when: ansible_os_family == 'Windows'
+
+- name: Set platform-specific variables
+  set_fact:
+    nodejs_arch_map:
+      x86_64: "linux-x64"
+      i386: "linux-x86"
+      AMD64: "win-x64"
+      x86: "win-x86"
+      arm64: "win-arm64"
+      armv7l: "linux-armv7l"
+      aarch64: "linux-arm64"
+    install_dir: "{{ ansible_os_family == 'Windows' | ternary('C:\\\\nodejs', '/opt/nodejs') }}"
+    temp_file: "{{ ansible_os_family == 'Windows' | ternary('C:\\\\Windows\\\\Temp\\\\nodejs.zip', '/tmp/nodejs.tar.xz') }}"
+    bin_dir: "{{ install_dir }}{{ ansible_os_family == 'Windows' | ternary('', '/bin') }}"
+  when: node_check is failed
+
+- name: Set Node.js download URL
+  set_fact:
+    nodejs_url: "https://nodejs.org/dist/v{{ nodejs_version }}/node-v{{ nodejs_version }}-{{ nodejs_arch_map[ansible_architecture] }}{{ ansible_os_family == 'Windows' | ternary('.zip', '.tar.xz') }}"
+  when: node_check is failed
+
+- name: Create installation directory
+  block:
+    - name: Create dir (Linux/macOS)
+      file:
+        path: "{{ install_dir }}"
+        state: directory
+      when: ansible_os_family != 'Windows'
+    
+    - name: Create dir (Windows)
+      win_file:
+        path: "{{ install_dir }}"
+        state: directory
+      when: ansible_os_family == 'Windows'
+  when: node_check is failed
+
+- name: Download Node.js
+  block:
+    - name: Download (Linux/macOS)
+      get_url:
+        url: "{{ nodejs_url }}"
+        dest: "{{ temp_file }}"
+      when: ansible_os_family != 'Windows'
+    
+    - name: Download (Windows)
+      win_get_url:
+        url: "{{ nodejs_url }}"
+        dest: "{{ temp_file }}"
+      when: ansible_os_family == 'Windows'
+  when: node_check is failed
+
+- name: Extract Node.js
+  block:
+    - name: Extract (Linux/macOS)
+      unarchive:
+        src: "{{ temp_file }}"
+        dest: "{{ install_dir }}"
+        remote_src: yes
+        extra_opts: "--strip-components=1"
+        creates: "{{ bin_dir }}/node"
+      when: ansible_os_family != 'Windows'
+    
+    - name: Extract (Windows)
+      win_unzip:
+        src: "{{ temp_file }}"
+        dest: "{{ install_dir }}"
+        creates: "{{ bin_dir }}\\node.exe"
+      when: ansible_os_family == 'Windows'
+  when: node_check is failed
+
+- name: Add to PATH (Linux/macOS)
+  block:
+    - name: Create symlinks
+      file:
+        src: "{{ bin_dir }}/{{ item }}"
+        path: "/usr/local/bin/{{ item }}"
+        state: link
+        force: yes
+      loop: [ "node", "npm" ]
+    
+    - name: Update environment path
+      lineinfile:
+        path: /etc/environment
+        regexp: '^PATH='
+        line: 'PATH="{{ bin_dir }}:$PATH"'
+        state: present
+  when: 
+    - node_check is failed
+    - ansible_os_family != 'Windows'
+
+- name: Add to PATH (Windows)
+  block:
+    - name: Add Node.js to system PATH
+      win_path:
+        name: "{{ bin_dir }}"
+        state: present
+      
+    - name: Refresh environment
+      win_environment:
+        state: present
+  when: 
+    - node_check is failed
+    - ansible_os_family == 'Windows'
+
+- name: Cleanup
+  block:
+    - name: Remove temp file (Linux/macOS)
+      file:
+        path: "{{ temp_file }}"
+        state: absent
+      when: ansible_os_family != 'Windows'
+    
+    - name: Remove temp file (Windows)
+      win_file:
+        path: "{{ temp_file }}"
+        state: absent
+      when: ansible_os_family == 'Windows'
+  when: node_check is failed

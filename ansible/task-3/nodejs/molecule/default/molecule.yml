@@ -1,0 +1,13 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: quay.io/centos/centos:stream8
+    pre_build_image: true
+dependency:
+  name: galaxy
+  options:
+    ignore-certs: true
+    ignore-errors: true
+    role-name: nodejs

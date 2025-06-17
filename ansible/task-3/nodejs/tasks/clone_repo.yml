@@ -1,0 +1,33 @@
+- name: Ensure website directory exists
+  file:
+    path: "{{ website_dir }}"
+    state: directory
+
+- name: Ensure SSH directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.ssh"
+    state: directory
+    mode: 0700
+- name: Copy private key from master node
+  copy:
+    src: "{{ master_ssh_private_key_path }}"
+    dest: "{{ ansible_user_dir }}/.ssh/id_rsa"
+    mode: 0600
+- name: Copy public key from master node
+  copy:
+    src: "{{ master_ssh_public_key_path }}"
+    dest: "{{ ansible_user_dir }}/.ssh/id_rsa.pub"
+    mode: 0644
+
+- name: Copy SSH config from master node
+  copy:
+    src: "{{ master_ssh_config_path }}"
+    dest: "{{ ansible_user_dir }}/.ssh/config"
+    mode: 0600
+
+- name: Clone repository
+  git:
+    repo: "{{ website_repo }}"
+    dest: "{{ website_dir }}"
+    version: "{{ git_branch | default('main') }}"
+  when: run_git_clone | bool

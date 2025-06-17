@@ -1,0 +1,7 @@
+---
+# tasks file for nodejs
+- include_tasks: install_nodejs.yml
+- include_tasks: clone_repo.yml
+  when: run_git_clone | bool
+- include_tasks: start_app.yml
+  when: run_git_clone | bool
